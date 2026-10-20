@@ -183,26 +183,26 @@ class GroupMemberDetailView(generics.UpdateAPIView):
 
 
 
+
 class LeaveGroupView(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        return GroupMember.objects.filter(
-            group_id=self.kwargs['group_id'],
-            user=self.request.user
-        )
+    def get_object(self):
+        group_id = self.kwargs['group_id']
+
+        membership = get_object_or_404(GroupMember,group_id=group_id,user=self.request.user)
+
+        return membership
 
     def destroy(self, request, *args, **kwargs):
         membership = self.get_object()
 
         if membership.group.owner_id == request.user.id:
-            raise PermissionDenied(
-                'Владелец не может выйти из группы.'
-            )
+            raise PermissionDenied('Владелец не может выйти из группы.')
 
         membership.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class GroupMessageListCreateView(generics.ListCreateAPIView):
