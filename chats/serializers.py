@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from account.models import Account
-from .models import Chat
+from .models import Chat,Message
 
 
 class ChatSerializer(serializers.ModelSerializer):
@@ -41,3 +41,14 @@ class ChatSerializer(serializers.ModelSerializer):
         )
 
         return chat
+    
+    
+
+
+class MessageSerializer(serializers.ModelSerializer):
+    sender = serializers.ReadOnlyField(source='sender.username')
+
+    class Meta:
+        model = Message
+        fields = ['id', 'chat', 'sender', 'content', 'created_at']
+        read_only_fields = ['id', 'chat', 'sender', 'created_at']
