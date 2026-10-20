@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'profiles',
     'chats',
     'groups',
-    'channels',
+    'channel',
 ]
 
 SWAGGER_SETTINGS = {
