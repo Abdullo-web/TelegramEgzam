@@ -11,7 +11,7 @@ class ChannelListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return Channel.objects.filter(
-            owner=self.request.user
+            type='public'
         ).order_by('-id')
 
     def perform_create(self, serializer):
