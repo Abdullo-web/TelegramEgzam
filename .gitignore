@@ -1,0 +1,23 @@
+# Виртуальное окружение Python
+venv/
+.venv/
+env/
+
+# Кэш Python
+__pycache__/
+*.pyc
+
+# Папка зависимостей Node.js
+node_modules/
+
+# Файлы окружения с ключами и паролями (ВАЖНО!)
+.env
+.env.local
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Настройки IDE / редакторов
+.vscode/
+.idea/
