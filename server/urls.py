@@ -19,6 +19,7 @@ urlpatterns = [
     path('api/accounts/', include('account.urls')),
     path('api/profiles/', include('profiles.urls')),
     path('api/chats/', include('chats.urls')),
+    path('api/groups/', include('groups.urls')),
     re_path(
         r'^swagger/$',
         schema_view.with_ui('swagger', cache_timeout=0),
