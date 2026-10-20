@@ -9,6 +9,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 class ChannelListCreateView(generics.ListCreateAPIView):
     serializer_class = ChannelSerializer
     
+    
+    
     def get_permissions(self):
         if self.request.method == 'POST':
             return [IsAuthenticated()]
@@ -24,9 +26,13 @@ class ChannelListCreateView(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
         
         
-class ChannelDetailView(generics.RetrieveAPIView):
+class ChannelDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ChannelSerializer
-    permission_classes = [AllowAny]
+    
+    def get_permissions(self):
+        if self.request.method in ['PATCH', 'DELETE']:
+            return [IsAuthenticated()]
+        return [AllowAny()]
 
     def get_queryset(self):
         return Channel.objects.all()
